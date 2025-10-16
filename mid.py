@@ -73,3 +73,38 @@ window.mainloop()
 +
  # 윈도우가 화면에 표시되도록 유지
  window.mainloop()
+
+ --- a/notepad.py
++++ b/notepad.py
+@@ -1,5 +1,17 @@
+ import tkinter as tk
+ from tkinter import filedialog
++
++# 편집 기능
++def cut_text():
++    text_area.event_generate("<<Cut>>")
++
++def copy_text():
++    text_area.event_generate("<<Copy>>")
++
++def paste_text():
++    text_area.event_generate("<<Paste>>")
++
++
+ 
+ # 새 파일
+ def new_file():
+@@ -37,6 +49,14 @@
+ # 메뉴바에 파일 메뉴 추가
+ menu_bar.add_cascade(label="파일", menu=file_menu)
+ 
++# 편집 메뉴 생성
++edit_menu = tk.Menu(menu_bar, tearoff=0)
++edit_menu.add_command(label="잘라내기", command=cut_text)
++edit_menu.add_command(label="복사", command=copy_text)
++edit_menu.add_command(label="붙여넣기", command=paste_text)
++
++menu_bar.add_cascade(label="편집", menu=edit_menu)
++
+ # 윈도우에 메뉴바 설정
+ window.config(menu=menu_bar)
